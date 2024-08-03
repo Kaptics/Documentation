@@ -10,13 +10,17 @@ Example of a **SendMarker** function to send a marker in the session csv file (M
 
 **MarkerValue :** if you want to force a value for the marker, the value will increment automatically if not specified.
 ```
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+
 private void SendMarker(int Port = 1099, string IpAddress = "127.0.0.1", int MarkerValue = -1)
-{      
+{
     UdpClient udp = new UdpClient();
     IPEndPoint ep = new IPEndPoint(IPAddress.Parse(IpAddress), Port);
 
     string request = "PostMarker";
-    if (valueRequest != -1)
+    if (MarkerValue != -1)
     {
         request = $"{request}:{MarkerValue}";
     }
@@ -24,7 +28,7 @@ private void SendMarker(int Port = 1099, string IpAddress = "127.0.0.1", int Mar
     udp.Connect(ep);
 
     byte[] message = Encoding.Unicode.GetBytes(request);
-    udp.Send(emptyMessage, emptyMessage.Length);
+    udp.Send(message, message.Length);
 
     udp.Close();
 }

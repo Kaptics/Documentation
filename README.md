@@ -34,7 +34,7 @@ private void SendMarker(int Port = 1099, string IpAddress = "127.0.0.1", int Mar
 }
 ```
 
-## Read from a board
+## Read data in your application
 
 You can use the brainflow library to read headset data into your own application.
 
